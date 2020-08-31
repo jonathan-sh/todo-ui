@@ -94,7 +94,10 @@ export default ({ task, getTasks }) => {
                 open={askToDelete}
                 text={'Do you want delete this task?'}
                 detail={task.name}
-                yesFunction={() => remove()}
+                yesFunction={() => {
+                    remove();
+                    setAskToDelete(false);
+                }}
                 noFunction={() => setAskToDelete(false)}
             />
         </div>

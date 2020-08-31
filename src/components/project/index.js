@@ -116,6 +116,11 @@ export default ({ project, getProjects }) => {
                     value={newTask}
                     className={style.taskName}
                     placeholder={'type the new task here'}
+                    onKeyPress={(event) => {
+                        if(event.key === "Enter"){
+                            createNewTask(); 
+                        }
+                    }}
                     onChange={(event) => {
                         const value = event.target.value;
                         setNewTask(value);
@@ -143,7 +148,10 @@ export default ({ project, getProjects }) => {
                 open={askToDelete}
                 text={'Do you want delete this project?'}
                 detail={project.name}
-                yesFunction={() => remove()}
+                yesFunction={() => {
+                    remove();
+                    setAskToDelete(false);
+                }}
                 noFunction={() => setAskToDelete(false)}
             />
         </div>
