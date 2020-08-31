@@ -25,7 +25,7 @@ export default ({ task, getTasks }) => {
     const [name, setName] = useState(task.name);
     const [finished, setFinished] = useState(task.finished);
     const [visible, setVisible] = useState({});
-
+    
     const remove = () => {
         axios().delete(`/task/${task._id}`)
             .then(() => setVisible({display:'none'}))

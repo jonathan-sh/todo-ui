@@ -30,6 +30,7 @@ export default () => {
     const getProjects = () => {
         axios().get('/project')
                .then(it => {
+                   setProjects([]);
                    const foundProjects = it.data;
                    const list = foundProjects.map((it, id) => <Project key={id} project={it} getProjects={getProjects} />);
                    setProjects(list);

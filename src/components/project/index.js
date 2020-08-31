@@ -67,6 +67,7 @@ export default ({ project, getProjects }) => {
     const getTasks = () => {
         axios().get(`/task/${project._id}`)
             .then(response => {
+                setTasks([]);
                 const foundTaks = response.data;
                 const all = foundTaks.map((task, id) => <Task key={id} task={task} getTasks={getTasks} />)
                 setTasks(all);
