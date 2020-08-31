@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import DoneIcon from '@material-ui/icons/CheckBox';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import Ask from '../ask/'
 import theme from './style';
 import axios from '../../util/axios';
 
@@ -25,7 +26,8 @@ export default ({ task, getTasks }) => {
     const [name, setName] = useState(task.name);
     const [finished, setFinished] = useState(task.finished);
     const [visible, setVisible] = useState({});
-    
+    const [askToDelete, setAskToDelete] = useState(false);
+
     const remove = () => {
         axios().delete(`/task/${task._id}`)
             .then(() => setVisible({display:'none'}))
@@ -83,12 +85,18 @@ export default ({ task, getTasks }) => {
                     <div />
                     :
                     <label className={style.delete}>
-                        <IconButton component="span" onClick={() => remove()}>
+                        <IconButton component="span" onClick={() => setAskToDelete(true)}>
                             <Delete />
                         </IconButton>
                     </label>
             }
-
+            <Ask 
+                open={askToDelete}
+                text={'Do you want delete this task?'}
+                detail={task.name}
+                yesFunction={() => remove()}
+                noFunction={() => setAskToDelete(false)}
+            />
         </div>
     );
 }

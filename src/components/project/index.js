@@ -11,6 +11,7 @@ import Tost from '../toast';
 import axios from '../../util/axios';
 import Task from '../task';
 import theme from './style';
+import Ask from '../ask/'
 
 const update = _.debounce((projetc) => {
     axios().put(`/project/${projetc._id}`, projetc)
@@ -25,16 +26,19 @@ export default ({ project, getProjects }) => {
     const [tostMsg, setTostMsg] = useState('');
     const [tostSeverity, setTostSeverity] = useState('info');
     const [showTost, setShowTost] = useState(false);
-   
+
     const [tasks, setTasks] = useState([]);
     const newTaskRef = useRef(null);
     const [newTask, setNewTask] = useState();
     const [projectName, setProjecName] = useState(project.name);
 
+    const [askToDelete, setAskToDelete] = useState(false);
+
+
     const [visible, setVisible] = useState({});
     const remove = () => {
         axios().delete(`/project/${project._id}`)
-            .then(() => setVisible({display:'none'}))
+            .then(() => setVisible({ display: 'none' }))
             .catch(it => {
                 const data = _.get(it, ['response', 'data']);
                 console.log(data);
@@ -95,7 +99,7 @@ export default ({ project, getProjects }) => {
                         update(project);
                     }} />
                 <label className={style.deleteProject}>
-                    <IconButton onClick={() => remove()}>
+                    <IconButton onClick={() => setAskToDelete(true)}>
                         <Delete />
                     </IconButton>
                 </label>
@@ -133,6 +137,14 @@ export default ({ project, getProjects }) => {
                 variant='filled'
                 severity={tostSeverity}
                 text={tostMsg}
+            />
+
+            <Ask
+                open={askToDelete}
+                text={'Do you want delete this project?'}
+                detail={project.name}
+                yesFunction={() => remove()}
+                noFunction={() => setAskToDelete(false)}
             />
         </div>
     );
