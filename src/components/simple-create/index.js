@@ -87,7 +87,7 @@ export default ({ path, label, title, fields, caseCreateFunction, autoClose = tr
                         Cancel
                     </Button>
                     <Button variant='contained' onClick={salve} color='primary' className={style.white}>
-                        Salve
+                        Save
                     </Button>
                 </DialogActions>
             </Dialog>

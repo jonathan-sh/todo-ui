@@ -45,7 +45,7 @@ export default () => {
                         variant='outlined'
                         margin='normal'
                         inputRef={passwordRef}
-                        label='Senha'
+                        label='Password'
                         type='password'
                         onChange={(event) => setPassword(event.target.value)}
                         autoComplete='current-password'
