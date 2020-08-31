@@ -85,7 +85,6 @@ export default () => {
                         caseCreateFunction={(form) => {
                             service.doLogin(form.email, form.password)
                                 .then(() => history.push('/dash'))
-                                .catch(setShowTost(true))
                         }}
                     >
                     </SempleCrud>

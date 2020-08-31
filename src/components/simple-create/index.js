@@ -12,6 +12,7 @@ import { get } from 'lodash';
 import useVerify from '../../hooks/useVerify';
 import axios from '../../util/axios';
 import Toast from '../toast';
+import useSytle from './style';
 
 const checkers = []
 const object = {};
@@ -36,8 +37,9 @@ const getForm = (itens) => {
 
 export default ({ path, label, title, fields, caseCreateFunction, autoClose = true}) => {
 
-    const style = useTheme();
-    const fullScreen = useMediaQuery(style.breakpoints.down('xs'));
+    const theme = useTheme();
+    const style = useSytle();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
     const [open, setOpen] = useState(false);
     const openModel = () => setOpen(true);
@@ -72,7 +74,7 @@ export default ({ path, label, title, fields, caseCreateFunction, autoClose = tr
     return (
         <div>
             <Button fullWidth variant='contained' color='primary' onClick={openModel}>
-                <label style={{ color: '#fff' }} >{label} </label>
+                <label className={style.white} >{label} </label>
             </Button>
             <Dialog fullScreen={fullScreen} open={open} onClose={closeModel}>
 
@@ -84,7 +86,7 @@ export default ({ path, label, title, fields, caseCreateFunction, autoClose = tr
                     <Button autoFocus onClick={closeModel}>
                         Cancel
                     </Button>
-                    <Button variant='contained' onClick={salve} color='primary'>
+                    <Button variant='contained' onClick={salve} color='primary' className={style.white}>
                         Salve
                     </Button>
                 </DialogActions>

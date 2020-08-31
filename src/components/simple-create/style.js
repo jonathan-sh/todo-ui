@@ -5,4 +5,7 @@ export default makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
         color: '#fff'
     },
+    white:{
+        color: '#fff'
+    }
 }));
